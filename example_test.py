@@ -15,10 +15,11 @@ def driver(request):
 def test_example(driver):
     driver.get("http://www.google.com/")
     # 10-секундное ожидание
-    wait = WebDriverWait(driver, 10)
-    driver.find_element_by_class_name("xPnqmf").click()
+    wait = WebDriverWait(driver, 15)
+    driver.find_element_by_class_name("MiYK0e").click()
+    WebDriverWait(driver, 15)
     driver.find_element_by_id("K32").click()
-    #driver.find_element_by_class_name("xPnqmf").click()
+    driver.find_element_by_class_name("MiYK0e").click()
     driver.find_element_by_name("q").send_keys("webdriver")
     driver.refresh()
     driver.find_element_by_name("btnK").click()
