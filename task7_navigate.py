@@ -7,7 +7,8 @@ from selenium.webdriver.common.by import By
 @pytest.fixture
 def driver(request):
     # создание драйвера. Инициализация браузера
-    wd = webdriver.Chrome()
+    wd = webdriver.Chrome("D:/python_selenium_test/chromedriver_win32/chromedriver.exe")
+    #wd = webdriver.Chrome()
     request.addfinalizer(wd.quit)
     return wd
 
@@ -78,9 +79,9 @@ def test_left_frame_click(driver):
     driver.find_element_by_css_selector("li#doc-storage_encoding").click()
     assert "Storage Encoding" in driver.title
 
-    # Job Modules
+    # Modules
     driver.find_elements_by_id("app-")[7].click()
-    assert "Languages" in driver.title
+    assert "Job Modules" in driver.title
     driver.find_element_by_css_selector("li#doc-customer").click()
     assert "Customer Modules" in driver.title
     driver.find_element_by_css_selector("li#doc-shipping").click()
@@ -94,59 +95,68 @@ def test_left_frame_click(driver):
     driver.find_element_by_css_selector("li#doc-order_action").click()
     assert "Order Action Modules" in driver.title
 
-    # Job Modules
-    driver.find_elements_by_id("app-")[8].click()
-    assert "Languages" in driver.title
-    driver.find_element_by_css_selector("li#doc-storage_encoding").click()
-    assert "Storage Encoding" in driver.title
-
     # Orders
-    driver.find_elements_by_id("app-")[9].click()
+    driver.find_elements_by_id("app-")[8].click()
     assert "Orders" in driver.title
     driver.find_element_by_css_selector("li#doc-order_statuses").click()
     assert "Order Statuses" in driver.title
 
     # Pages
-    driver.find_elements_by_id("app-")[10].click()
+    driver.find_elements_by_id("app-")[9].click()
     assert "Pages" in driver.title
 
-    # Job Modules
+    # Reports
+    driver.find_elements_by_id("app-")[10].click()
+    assert "Monthly Sales" in driver.title
+    driver.find_element_by_css_selector("li#doc-most_sold_products").click()
+    assert "Most Sold Products" in driver.title
+    driver.find_element_by_css_selector("li#doc-most_shopping_customers").click()
+    assert "Most Shopping Customers" in driver.title
+
+    # Settings
     driver.find_elements_by_id("app-")[11].click()
-    assert "Languages" in driver.title
-    driver.find_element_by_css_selector("li#doc-storage_encoding").click()
-    assert "Storage Encoding" in driver.title
+    assert "Settings" in driver.title
+    driver.find_element_by_css_selector("li#doc-defaults").click()
+    assert "Settings" in driver.title
+    driver.find_element_by_css_selector("li#doc-general").click()
+    assert "Settings" in driver.title
+    driver.find_element_by_css_selector("li#doc-listings").click()
+    assert "Settings" in driver.title
+    driver.find_element_by_css_selector("li#doc-images").click()
+    assert "Settings" in driver.title
+    driver.find_element_by_css_selector("li#doc-checkout").click()
+    assert "Settings" in driver.title
+    driver.find_element_by_css_selector("li#doc-advanced").click()
+    assert "Settings" in driver.title
+    driver.find_element_by_css_selector("li#doc-security").click()
+    assert "Settings" in driver.title
 
-    # Job Modules
+    # Slides
     driver.find_elements_by_id("app-")[12].click()
-    assert "Languages" in driver.title
-    driver.find_element_by_css_selector("li#doc-storage_encoding").click()
-    assert "Storage Encoding" in driver.title
+    assert "Slides" in driver.title
 
-    # Job Modules
+    # Tax
     driver.find_elements_by_id("app-")[13].click()
-    assert "Languages" in driver.title
-    driver.find_element_by_css_selector("li#doc-storage_encoding").click()
-    assert "Storage Encoding" in driver.title
+    assert "Tax Classes" in driver.title
+    driver.find_element_by_css_selector("li#doc-tax_rates").click()
+    assert "Tax Rates" in driver.title
 
-    # Job Modules
+    # Search Translations
     driver.find_elements_by_id("app-")[14].click()
-    assert "Languages" in driver.title
-    driver.find_element_by_css_selector("li#doc-storage_encoding").click()
-    assert "Storage Encoding" in driver.title
+    assert "Search Translations" in driver.title
+    driver.find_element_by_css_selector("li#doc-scan").click()
+    assert "Scan Files For Translations" in driver.title
+    driver.find_element_by_css_selector("li#doc-csv").click()
+    assert "CSV Import/Export" in driver.title
 
-    # Job Modules
+    # Users
     driver.find_elements_by_id("app-")[15].click()
-    assert "Languages" in driver.title
-    driver.find_element_by_css_selector("li#doc-storage_encoding").click()
-    assert "Storage Encoding" in driver.title
+    assert "Users" in driver.title
 
-    # Job Modules
+    # vQmods
     driver.find_elements_by_id("app-")[16].click()
-    assert "Languages" in driver.title
-    driver.find_element_by_css_selector("li#doc-storage_encoding").click()
-    assert "Storage Encoding" in driver.title
+    assert "vQmods" in driver.title
 
-    # настройка неявных ожиданий
     driver.implicitly_wait(10)
 
 
