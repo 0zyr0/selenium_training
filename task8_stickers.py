@@ -49,7 +49,6 @@ def test_check_stickers(driver):
 
     for list in lists:
         sticker = list.find_element_by_xpath(".//div[@class='image-wrapper']/div")
-        check_exists_by_xpath(sticker)
         print(sticker)
         #sticker.get_attribute()
         # sticker = list.find_element_by_xpath(".//div[@class='sticker new']/")
