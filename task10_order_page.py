@@ -38,11 +38,17 @@ def test_check_orders(driver):
     #
     # duck_list = []
 
+    var = dict()
+
         ### Атрибуты главной страницы
 
     driver.get("http://localhost/litecart/en/")
 
     # Название
+    var.update({"main_duck_name": driver.find_element_by_css_selector("div#box-campaigns div.name").get_attribute("textContent")})
+
+    print(var["main_duck_name"])
+
     main_duck_name = driver.find_element_by_css_selector("div#box-campaigns div.name").get_attribute("textContent")
 
     # Обычная цена
@@ -68,9 +74,9 @@ def test_check_orders(driver):
     # Скидочная
     main_size_discount = driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-size")
 
-    main_duck_list = list(main_duck_name, main_duck_price, main_duck_price_discount, m_color_price, m_color_price_discount, m_price_line, m_bold, main_size, main_size_discount)
+    #main_duck_list = list(main_duck_name, main_duck_price, main_duck_price_discount, m_color_price, m_color_price_discount, m_price_line, m_bold, main_size, main_size_discount)
 
-    print('\n', main_duck_list, '\n')
+    #print('\n', main_duck_list, '\n')
 
         ### Атрибуты открытой ссылки
 
