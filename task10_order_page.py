@@ -23,20 +23,60 @@ def test_login(driver):
     #wait.until(EC.title_is("My Store"))
 
 
+def compare_element(element_1, element_2):
+
+    if element_1 == element_2:
+        print('Elements compared \n')
+    else:
+        print('Elements not compared \n')
+
+
 def test_check_orders(driver):
     test_login(driver)
+
+    # main_duck_list = []
+    #
+    # duck_list = []
+
+        ### Атрибуты главной страницы
+
     driver.get("http://localhost/litecart/en/")
 
+    # Название
     main_duck_name = driver.find_element_by_css_selector("div#box-campaigns div.name").get_attribute("textContent")
 
-    # Обычная
+    # Обычная цена
     main_duck_price = driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").get_attribute("textContent")
 
-    # Скидочная
+    # Скидочная цена
     main_duck_price_discount = driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").get_attribute("textContent")
+
+    # Цвета
+    m_color_price = driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("color")
+
+    m_color_price_discount = driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("color")
+
+    # Зачеркутость (line-through)
+    m_price_line = driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("text-decoration-line")
+
+    # Шрифт
+    m_bold = driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-weight")
+
+    # Обычная
+    main_size = driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("font-size")
+
+    # Скидочная
+    main_size_discount = driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-size")
+
+    main_duck_list = list(main_duck_name, main_duck_price, main_duck_price_discount, m_color_price, m_color_price_discount, m_price_line, m_bold, main_size, main_size_discount)
+
+    print('\n', main_duck_list, '\n')
+
+        ### Атрибуты открытой ссылки
 
     driver.get("http://localhost/litecart/en/rubber-ducks-c-1/subcategory-c-2/yellow-duck-p-1")
 
+    # Название
     duck_name = driver.find_element_by_css_selector("h1.title").get_attribute("textContent")
 
     # Обычная цена
@@ -45,28 +85,30 @@ def test_check_orders(driver):
     # Скидочная цена
     duck_price_discount = driver.find_element_by_css_selector("div.information strong.campaign-price").get_attribute("textContent")
 
-
     # Цвета
-    m_color_price = driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("color")
-
-    m_color_price_discount = driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("color")
-
     color_price = driver.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("color")
 
     color_price_discount = driver.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("color")
 
     # Зачеркутость (line-through)
-    m_price_line = driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("text-decoration-line")
-
     price_line = driver.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("text-decoration-line")
 
     # Шрифт?
-    driver.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-weight")
+    sub_bold = driver.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("font-weight")
 
-    # в) обычная цена зачёркнутая и серая (можно считать, что "серый" цвет это такой, у которого в RGBa представлении одинаковые значения для каналов R, G и B)
-    # г) акционная жирная и красная (можно считать, что "красный" цвет это такой, у которого в RGBa представлении каналы G и B имеют нулевые значения)
-    # (цвета надо проверить на каждой странице независимо, при этом цвета на разных страницах могут не совпадать)
-    # д) акционная цена крупнее, чем обычная (это тоже надо проверить на каждой странице независимо)
+    # Размер
 
+    # Обычная цена
+    duck_size = driver.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("font-size")
+
+    # Скидочная цена
+    duck_size_discount = driver.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("font-size")
+
+    # duck_list = list(duck_name, duck_price, duck_price_discount, color_price, color_price_discount, price_line, sub_bold, duck_size, duck_size_discount)
+    #
+    # print('\n', duck_list, '\n')
+
+
+    #compare_element()
 
 
