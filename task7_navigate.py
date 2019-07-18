@@ -8,8 +8,8 @@ from selenium.webdriver.common.by import By
 @pytest.fixture
 def driver(request):
     # создание драйвера. Инициализация браузера
-    wd = webdriver.Chrome("D:/python_selenium_test/chromedriver_win32/chromedriver.exe")
-    #wd = webdriver.Chrome()
+    #wd = webdriver.Chrome("D:/python_selenium_test/chromedriver_win32/chromedriver.exe")
+    wd = webdriver.Chrome()
     request.addfinalizer(wd.quit)
     return wd
 

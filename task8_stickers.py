@@ -34,4 +34,3 @@ def test_check_stickers(driver):
         # element = driver.find_element_by_css_selector("div.sticker")
         assert element
         print(element)
-
