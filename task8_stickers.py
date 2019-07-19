@@ -29,8 +29,20 @@ def test_check_stickers(driver):
 
     elements = driver.find_elements_by_css_selector("div.content div.box div.image-wrapper")
 
-    for i, element in enumerate(elements):
+    a_elements = driver.find_elements_by_class_name("product")
+
+    for i, element in enumerate(a_elements):
         element = driver.find_elements_by_tag_name("div.sticker")[i]
         # element = driver.find_element_by_css_selector("div.sticker")
         assert element
         print(element)
+
+
+    # for i, element in enumerate(elements):
+    #     element = driver.find_elements_by_tag_name("div.sticker")[i]
+    #     # element = driver.find_element_by_css_selector("div.sticker")
+    #     assert element
+    #     print(element)
+
+
+#Товары имеют класс .product, поэтому можно проверять точное название класса, и выбранный Вами локатор локатор для поиска товаров можно исправить.
