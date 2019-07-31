@@ -1,5 +1,6 @@
 import pytest
 from selenium import webdriver
+import re
 
 
 @pytest.fixture
@@ -29,9 +30,16 @@ def driver_firefox(request):
     return wd
 
 
-def give_me_digits(str_1):
+def get_rgb(str_rgb):
+    # Получаем из строки отдельные записи значений элементов R, G, B
 
-    [int(s) for s in str_1.split() if s.isdigit()]
+    color_list = re.findall(r'\d+', str_rgb)
+
+    r = color_list[0]
+    g = color_list[1]
+    b = color_list[2]
+
+    return [r, g, b]
 
 
 def compare_element(element_1, element_2):
@@ -42,99 +50,124 @@ def compare_element(element_1, element_2):
         print('Elements not expected \n')
 
 
-def check_regular_price(color_reg, line):
+def check_regular_price_chrome(colors, line):
+    exp_r_1 = '119'
 
-    exp_color1 = 'rgba(119, 119, 119, 1)'
+    exp_g_1 = '119'
 
-    exp_color2 = 'rgba(102, 102, 102, 1)'
+    exp_b_1 = '119'
 
-    r = give_me_digits(exp_color1)
+    exp_r_2 = '102'
 
-    g = give_me_digits(exp_color2)
+    exp_g_2 = '102'
 
-    b =give_me_digits(color_reg)
-
-    print(r, g, b)
+    exp_b_2 = '102'
 
     exp_line = 'line-through'
 
-    if ((color_reg[0] == exp_color1[0]) and (color_reg[1] == exp_color1[1]) and (color_reg[2] == exp_color1[2])) or \
-            ((color_reg[0] == exp_color2[0]) and (color_reg[1] == exp_color2[1]) and (color_reg[3] == exp_color2[3]))\
-            and (line == exp_line):
+    if (((colors[0] == exp_r_1) and (colors[1] == exp_g_1) and (colors[2] == exp_b_1)) or
+
+            ((colors[0] == exp_r_2) and (colors[1] == exp_g_2) and (colors[2] == exp_b_2)) and (line == exp_line)):
 
         print('Expected element properties \n')
     else:
         print('Not expected element properties \n')
 
-    # if ((color_reg == exp_color1) or (color_reg == exp_color2)) and (line == exp_line):
-    #     print('Expected element properties \n')
-    # else:
-    #     print('Not expected element properties \n')
 
+def check_discount_price_chrome(colors, font):
 
-def check_discount_price(color, font):
+    exp_g = '0'
 
-    exp_color = 'rgba(204, 0, 0, 1)'
+    exp_b = '0'
 
     exp_font = '700'
 
-    if (color == exp_color) and (font == exp_font):
+    if (colors[1] == exp_g) and (colors[2] == exp_b) and (font == exp_font):
         print('Expected element properties \n')
     else:
         print('Not expected element properties \n')
 
 
-def check_regular_price_firefox(color_reg, line):
+def check_regular_price_firefox(colors, line):
 
-    exp_color1 = 'rgb(119, 119, 119)'
+    exp_r_1 = '119'
 
-    exp_color2 = 'rgb(102, 102, 102)'
+    exp_g_1 = '119'
+
+    exp_b_1 = '119'
+
+    exp_r_2 = '102'
+
+    exp_g_2 = '102'
+
+    exp_b_2 = '102'
 
     exp_line = 'line-through'
 
-    if ((color_reg == exp_color1) or (color_reg == exp_color2)) and (line == exp_line):
+    if (((colors[0] == exp_r_1) and (colors[1] == exp_g_1) and (colors[2] == exp_b_1)) or
+
+            ((colors[0] == exp_r_2) and (colors[1] == exp_g_2) and (colors[2] == exp_b_2)) and (line == exp_line)):
         print('Expected element properties in Firefox \n')
     else:
         print('Not expected element properties in Firefox \n')
 
 
-def check_regular_price_ie(color_reg, line):
+def check_regular_price_ie(colors, line):
 
-    exp_color1 = 'rgba(119, 119, 119, 1)'
+    exp_r_1 = '119'
 
-    exp_color2 = 'rgba(102, 102, 102, 1)'
+    exp_g_1 = '119'
+
+    exp_b_1 = '119'
+
+    exp_r_2 = '102'
+
+    exp_g_2 = '102'
+
+    exp_b_2 = '102'
 
     exp_line = ''
 
-    if ((color_reg == exp_color1) or (color_reg == exp_color2)) and (line == exp_line):
+    if (((colors[0] == exp_r_1) and (colors[1] == exp_g_1) and (colors[2] == exp_b_1)) or
+
+            ((colors[0] == exp_r_2) and (colors[1] == exp_g_2) and (colors[2] == exp_b_2)) and (line == exp_line)):
         print('Expected element properties in IE \n')
     else:
         print('Not expected element properties in IE \n')
 
 
-def check_discount_price_ie(color, font):
+def check_discount_price_ie(colors, font):
 
-    exp_color = 'rgba(204, 0, 0, 1)'
+    exp_g = '0'
+
+    exp_b = '0'
 
     exp_font = '700'
 
     exp_font2 = '900'
 
-    if (color == exp_color) and ((font == exp_font) or (font == exp_font2)):
+    if (colors[1] == exp_g) and (colors[2] == exp_b) and ((font == exp_font) or (font == exp_font2)):
         print('Expected element properties in IE \n')
     else:
         print('Not expected element properties in IE \n')
 
+    # if (color == exp_color) and ((font == exp_font) or (font == exp_font2)):
+    #     print('Expected element properties in IE \n')
+    # else:
+    #     print('Not expected element properties in IE \n')
 
-def check_discount_price_firefox(color, font):
 
-    exp_color = 'rgb(204, 0, 0)'
+def check_discount_price_firefox(colors, font):
 
-    exp_font1 = '700'
+    exp_g = '0'
+
+    exp_b = '0'
+
+    exp_font = '700'
 
     exp_font2 = '900'
 
-    if (color == exp_color) and ((font == exp_font1) or (font == exp_font2)):
+    if (colors[1] == exp_g) and (colors[2] == exp_b) and ((font == exp_font) or (font == exp_font2)):
         print('Expected element properties in Firefox \n')
     else:
         print('Not expected element properties in Firefox \n')
@@ -148,7 +181,6 @@ def test_check_orders(driver_chrome):
     driver_chrome.get("http://localhost/litecart/en/")
 
     # Название
-
     main_duck_name = driver_chrome.find_element_by_css_selector("div#box-campaigns div.name").get_attribute("textContent")
 
     # Обычная цена
@@ -195,7 +227,7 @@ def test_check_orders(driver_chrome):
     # Зачеркутость (line-through)
     price_line = driver_chrome.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("text-decoration-line")
 
-    # Шрифт?
+    # Шрифт
     sub_bold = driver_chrome.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("font-weight")
 
     # Размер
@@ -216,21 +248,22 @@ def test_check_orders(driver_chrome):
 
     # Соответствие зачернутости и цвету
 
-    check_regular_price(m_color_price, m_price_line)
+    check_regular_price_chrome(get_rgb(m_color_price), m_price_line)
 
-    check_regular_price(color_price, price_line)
+    check_regular_price_chrome(get_rgb(color_price), price_line)
 
     # Соответствие стилю и цвету
 
-    check_discount_price(m_color_price_discount, m_bold)
+    check_discount_price_chrome(get_rgb(m_color_price_discount), m_bold)
 
-    check_discount_price(color_price_discount, sub_bold)
+    check_discount_price_chrome(get_rgb(color_price_discount), sub_bold)
 
     # Сравнение размера
 
     compare_element(main_size, main_size_discount)
 
     compare_element(duck_size, duck_size_discount)
+
 
     print("----------------------------------------- Test Chrome Done ----------------------------------------- \n")
 
@@ -311,15 +344,15 @@ def test_check_orders_ff(driver_firefox):
 
     # Соответствие зачернутости и цвету
 
-    check_regular_price_firefox(m_color_price, m_price_line)
+    check_regular_price_firefox(get_rgb(m_color_price), m_price_line)
 
-    check_regular_price_firefox(color_price, price_line)
+    check_regular_price_firefox(get_rgb(color_price), price_line)
 
     # Соответствие стилю и цвету
 
-    check_discount_price_firefox(m_color_price_discount, m_bold)
+    check_discount_price_firefox(get_rgb(m_color_price_discount), m_bold)
 
-    check_discount_price_firefox(color_price_discount, sub_bold)
+    check_discount_price_firefox(get_rgb(color_price_discount), sub_bold)
 
     # Сравнение размера
 
@@ -406,15 +439,15 @@ def test_check_orders_ie(driver_ie):
 
     # Соответствие зачернутости и цвету
 
-    check_regular_price_ie(m_color_price, m_price_line)
+    check_regular_price_ie(get_rgb(m_color_price), m_price_line)
 
-    check_regular_price_ie(color_price, price_line)
+    check_regular_price_ie(get_rgb(color_price), price_line)
 
     # Соответствие стилю и цвету
 
-    check_discount_price_ie(m_color_price_discount, m_bold)
+    check_discount_price_ie(get_rgb(m_color_price_discount), m_bold)
 
-    check_discount_price_ie(color_price_discount, sub_bold)
+    check_discount_price_ie(get_rgb(color_price_discount), sub_bold)
 
     # Сравнение размера
 
