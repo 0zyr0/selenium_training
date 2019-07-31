@@ -23,9 +23,6 @@ def test_login(driver):
     #wait.until(EC.title_is("My Store"))
 
 
-# def check_sort_elements():
-
-
 def test_check_sort1(driver):
     test_login(driver)
     driver.get("http://localhost/litecart/admin/?app=countries&doc=countries")

@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 
 
@@ -32,7 +33,24 @@ def test_check_stickers(driver):
     a_elements = driver.find_elements_by_class_name("product")
 
     for i, element in enumerate(a_elements):
-        element = driver.find_elements_by_tag_name("div.sticker")[i]
+
+        try:
+            element = driver.find_elements_by_tag_name("div.sticker")[i]
+        except NoSuchElementException:
+            return False
+        return True
+
+
+
+        # if (element.size is not None) and (element.size == 1):
+        #
+        #     print('One sticker')
+        #
+        # elif element.size == 0:
+        #     print("No stickers")
+        #
+        # else:
+        #     print('More stickers')
         # element = driver.find_element_by_css_selector("div.sticker")
         assert element
         print(element)

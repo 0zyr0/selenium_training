@@ -29,6 +29,11 @@ def driver_firefox(request):
     return wd
 
 
+def give_me_digits(str_1):
+
+    [int(s) for s in str_1.split() if s.isdigit()]
+
+
 def compare_element(element_1, element_2):
 
     if element_1 == element_2:
@@ -43,12 +48,28 @@ def check_regular_price(color_reg, line):
 
     exp_color2 = 'rgba(102, 102, 102, 1)'
 
+    r = give_me_digits(exp_color1)
+
+    g = give_me_digits(exp_color2)
+
+    b =give_me_digits(color_reg)
+
+    print(r, g, b)
+
     exp_line = 'line-through'
 
-    if ((color_reg == exp_color1) or (color_reg == exp_color2)) and (line == exp_line):
+    if ((color_reg[0] == exp_color1[0]) and (color_reg[1] == exp_color1[1]) and (color_reg[2] == exp_color1[2])) or \
+            ((color_reg[0] == exp_color2[0]) and (color_reg[1] == exp_color2[1]) and (color_reg[3] == exp_color2[3]))\
+            and (line == exp_line):
+
         print('Expected element properties \n')
     else:
         print('Not expected element properties \n')
+
+    # if ((color_reg == exp_color1) or (color_reg == exp_color2)) and (line == exp_line):
+    #     print('Expected element properties \n')
+    # else:
+    #     print('Not expected element properties \n')
 
 
 def check_discount_price(color, font):
