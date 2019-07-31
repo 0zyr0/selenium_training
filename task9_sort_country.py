@@ -5,7 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import re
 
 
-
 @pytest.fixture
 def driver(request):
     # создание драйвера. Инициализация браузера
@@ -53,42 +52,71 @@ def test_check_sort1(driver):
     else:
         print(original_list_country_names[i], ' not equals ', sorted_list_country_names[i], '\n')
 
-    # --------------
-
-    original_list_zones = []
-
-    sorted_list_zones = []
+    # Canada Zones
 
     driver.get("http://localhost/litecart/admin/?app=countries&doc=edit_country&country_code=CA")
 
-    # elements = driver.find_elements_by_css_selector("table tbody tr:not([class])")
+    element_2 = driver.find_elements_by_css_selector('#table-zones > tbody > tr:not([class])')
 
-    #elements = driver.find_elements_by_css_selector("table tbody tr:not([class]) td[style*=text]")
+    original_list_zones_ca = []
 
-    elements = driver.find_element_by_css_selector('#table-zones > tbody > tr')
-    print(elements)
-    array1 = []
-    lengthOfElements = len(elements) - 1
+    sorted_list_zones_ca = []
 
-    for i, el in enumerate(elements):
-        array1.append(el.text)
-        if i == lengthOfElements:
+    length_of_elements = len(element_2) - 2
+
+    for i, el in enumerate(element_2):
+
+        original_list_zones_ca.append(re.match(r'^\d+\s+\w{2}\s*(.*)$', el.text)[1].strip())
+
+        sorted_list_zones_ca.append(re.match(r'^\d+\s+\w{2}\s*(.*)$', el.text)[1].strip())
+
+        if i == length_of_elements:
             break
 
-        # original_list_country_names.append(re.match(r'^\d+\s*\w{2}\s*(.+)\d+$', element.text)[1].strip())
-        # print(element.text)
-        # original_list_country_names.append(re.match(r'^\d+\s*\w{2}\s*(.+)\d+$', element.text)[1].strip())
-        #
-        # sorted_list_country_names.append(re.match(r'^\d+\s*\w{2}\s*(.+)\d+$', element.text)[1].strip())
+    sorted_list_zones_ca.sort()
 
-    print(array1)
+    if original_list_zones_ca[i] == sorted_list_zones_ca[i]:
+        print('Zones CA sorted by Aa..Zz', '\n')
+    else:
+        print(original_list_zones_ca[i], ' not equals ', sorted_list_zones_ca[i], '\n')
+
+    print("Canada (Edit) Zones: \n", original_list_zones_ca, '\n')
+
+    print("Canada (Edit) Sorted Zones: \n", sorted_list_zones_ca, '\n')
+
+    # USA Zones
+
     driver.get("http://localhost/litecart/admin/?app=countries&doc=edit_country&country_code=US")
 
-    # driver.find_element_by_css_selector("tr.row:nth-child(39) td:nth-child(5)").click()
+    element_3 = driver.find_elements_by_css_selector('#table-zones > tbody > tr:not([class])')
 
-    # driver.find_element_by_tag_name("tr.row:nth-child(224) td:nth-child(5)").click()
+    original_list_zones_us = []
 
-    print('Test Sort Country names has done')
+    sorted_list_zones_us = []
+
+    length_of_elements_2 = len(element_3) - 2
+
+    for i, el_us in enumerate(element_3):
+
+        original_list_zones_us.append(re.match(r'^\d+\s+\w{2}\s*(.*)$', el_us.text)[1].strip())
+
+        sorted_list_zones_us.append(re.match(r'^\d+\s+\w{2}\s*(.*)$', el_us.text)[1].strip())
+
+        if i == length_of_elements_2:
+            break
+
+    sorted_list_zones_us.sort()
+
+    if original_list_zones_us[i] == sorted_list_zones_us[i]:
+        print('Zones US sorted by Aa..Zz', '\n')
+    else:
+        print(original_list_zones_us[i], ' not equals ', sorted_list_zones_us[i], '\n')
+
+    print("USA (Edit) Zones: \n", original_list_zones_ca, '\n')
+
+    print("USA (Edit) Sorted Zones: \n", sorted_list_zones_ca, '\n')
+
+    print('*** Test Sort Country and Zones(Edit) names has done *** ')
 
 
 def test_check_sort2(driver):
@@ -109,11 +137,11 @@ def test_check_sort2(driver):
 
         sorted_list3.append(element3.get_property('text'))
 
-    print("Canada Zones: ", list3, '\n')
+    print("Canada Zones: \n", list3, '\n')
 
     sorted_list3.sort()
 
-    print("Canada Sorted Zones: ", sorted_list3, '\n')
+    print("Canada Sorted Zones: \n", sorted_list3, '\n')
 
     if list3[i] == sorted_list3[i]:
         print('Zones sorted by Aa..Zz', '\n')
@@ -132,15 +160,15 @@ def test_check_sort2(driver):
 
         sorted_list4.append(element4.get_property('text'))
 
-    print("USA Zones: ", list4, '\n')
+    print("USA Zones: \n", list4, '\n')
 
     sorted_list4.sort()
 
-    print("USA Sorted Zones: ", sorted_list4, '\n')
+    print("USA Sorted Zones: \n", sorted_list4, '\n')
 
     if list4[i] == sorted_list4[i]:
         print('Zones sorted by Aa..Zz', '\n')
     else:
         print(list4[i], ' not equals ', sorted_list4[i], '\n')
 
-    print('Test Sort Zones names has done')
+    print('*** Test Sort Zones names has done ***')
