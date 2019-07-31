@@ -1,8 +1,24 @@
+# Сделайте сценарий для регистрации нового пользователя в учебном приложении litecart (не в админке, а в клиентской части магазина).
+#
+# Сценарий должен состоять из следующих частей:
+#
+# 1) регистрация новой учётной записи с достаточно уникальным адресом электронной почты (чтобы не конфликтовало с ранее созданными пользователями, в том числе при предыдущих запусках того же самого сценария),
+# 2) выход (logout), потому что после успешной регистрации автоматически происходит вход,
+# 3) повторный вход в только что созданную учётную запись,
+# 4) и ещё раз выход.
+#
+#     В качестве страны выбирайте United States, штат произвольный. При этом формат индекса -- пять цифр.
+#
+#     Можно оформить сценарий либо как тест, либо как отдельный исполняемый файл.
+#
+#     Проверки можно никакие не делать, только действия -- заполнение полей, нажатия на кнопки и ссылки. Если сценарий дошёл до конца, то есть созданный пользователь смог выполнить вход и выход -- значит создание прошло успешно.
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 import random
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
 
 
 @pytest.fixture
@@ -35,6 +51,7 @@ def generate_email(user, out="account"):
     with open(out, "a") as file:
         file.write(user.email + "\n")
         file.close()
+
 
 def data_for_test():
     first_name = 'test'
@@ -89,24 +106,31 @@ def test_check_email(driver):
     return email_list
 
 
-# def check_mail(atr):
-#     email_list = test_check_email(driver)
-#     if atr in email_list:
-#         print('This email adress not available!')
-#     else:
-#         atr = ge
+def test_sign_up(driver):
+    test_login(driver)
 
-# Сделайте сценарий для регистрации нового пользователя в учебном приложении litecart (не в админке, а в клиентской части магазина).
-#
-# Сценарий должен состоять из следующих частей:
-#
-# 1) регистрация новой учётной записи с достаточно уникальным адресом электронной почты (чтобы не конфликтовало с ранее созданными пользователями, в том числе при предыдущих запусках того же самого сценария),
-# 2) выход (logout), потому что после успешной регистрации автоматически происходит вход,
-# 3) повторный вход в только что созданную учётную запись,
-# 4) и ещё раз выход.
-#
-#     В качестве страны выбирайте United States, штат произвольный. При этом формат индекса -- пять цифр.
-#
-#     Можно оформить сценарий либо как тест, либо как отдельный исполняемый файл.
-#
-#     Проверки можно никакие не делать, только действия -- заполнение полей, нажатия на кнопки и ссылки. Если сценарий дошёл до конца, то есть созданный пользователь смог выполнить вход и выход -- значит создание прошло успешно.
+    driver.get("http://localhost/litecart/en/")
+
+    driver.find_element_by_css_selector("tr:nth-child(5)").click()
+
+    driver.find_element_by_name("firstname").send_keys("test")
+
+    driver.find_element_by_name("lastname").send_keys("test")
+
+    driver.find_element_by_name("address1").send_keys("test")
+
+    driver.find_element_by_name("postcode").send_keys("test")
+
+    driver.find_element_by_name("city").send_keys("test")
+
+    # select_country = driver.find_element_by_css_selector("span[class='select2-selection select2-selection--single']")
+
+    select_country = driver.find_element_by_css_selector("select[name='country_code']")
+
+    Select(select_country).select_by_value("US")
+
+    driver.find_element_by_name("email").send_keys()
+
+    driver.find_element_by_name("phone").send_keys("+1")
+
+    print("Done")

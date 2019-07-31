@@ -38,11 +38,7 @@ def test_check_sort1(driver):
 
         sorted_list_country_names.append(re.match(r'^\d+\s*\w{2}\s*(.+)\d+$', element.text)[1].strip())
 
-    print(original_list_country_names, '\n')
-
     sorted_list_country_names.sort()
-
-    print(sorted_list_country_names, '\n')
 
     if original_list_country_names[i] == sorted_list_country_names[i]:
         print('Countries sorted by Aa..Zz', '\n')
@@ -77,10 +73,6 @@ def test_check_sort1(driver):
     else:
         print(original_list_zones_ca[i], ' not equals ', sorted_list_zones_ca[i], '\n')
 
-    print("Canada (Edit) Zones: \n", original_list_zones_ca, '\n')
-
-    print("Canada (Edit) Sorted Zones: \n", sorted_list_zones_ca, '\n')
-
     # USA Zones
 
     driver.get("http://localhost/litecart/admin/?app=countries&doc=edit_country&country_code=US")
@@ -109,10 +101,6 @@ def test_check_sort1(driver):
     else:
         print(original_list_zones_us[i], ' not equals ', sorted_list_zones_us[i], '\n')
 
-    print("USA (Edit) Zones: \n", original_list_zones_ca, '\n')
-
-    print("USA (Edit) Sorted Zones: \n", sorted_list_zones_ca, '\n')
-
     print('*** Test Sort Country and Zones(Edit) names has done *** ')
 
 
@@ -121,8 +109,6 @@ def test_check_sort2(driver):
     driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones")
 
     driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=edit_geo_zone&page=1&geo_zone_id=1")
-
-    #driver.find_elements_by_css_selector(".dataTable tr select[name*='[zone_code]']")
 
     el3 = driver.find_elements_by_css_selector(".dataTable tr select[name*='[zone_code]'] option[selected='selected']")
     list3 = []
@@ -134,11 +120,7 @@ def test_check_sort2(driver):
 
         sorted_list3.append(element3.get_property('text'))
 
-    print("Canada Zones: \n", list3, '\n')
-
     sorted_list3.sort()
-
-    print("Canada Sorted Zones: \n", sorted_list3, '\n')
 
     if list3[i] == sorted_list3[i]:
         print('Zones sorted by Aa..Zz', '\n')
@@ -157,11 +139,7 @@ def test_check_sort2(driver):
 
         sorted_list4.append(element4.get_property('text'))
 
-    print("USA Zones: \n", list4, '\n')
-
     sorted_list4.sort()
-
-    print("USA Sorted Zones: \n", sorted_list4, '\n')
 
     if list4[i] == sorted_list4[i]:
         print('Zones sorted by Aa..Zz', '\n')
@@ -169,3 +147,48 @@ def test_check_sort2(driver):
         print(list4[i], ' not equals ', sorted_list4[i], '\n')
 
     print('*** Test Sort Zones names has done ***')
+
+
+# def test_check_sort3(driver):
+#     test_login(driver)
+#     driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones")
+#
+#     driver.find_elements_by_tag_name().click()
+#
+#     el3 = driver.find_elements_by_css_selector(".dataTable tr select[name*='[zone_code]'] option[selected='selected']")
+#     list3 = []
+#     sorted_list3 = []
+#
+#     for i, element3 in enumerate(el3):
+#
+#         list3.append(element3.get_property('text'))
+#
+#         sorted_list3.append(element3.get_property('text'))
+#
+#     sorted_list3.sort()
+#
+#     if list3[i] == sorted_list3[i]:
+#         print('Zones sorted by Aa..Zz', '\n')
+#     else:
+#         print(list3[i], ' not equals ', sorted_list3[i], '\n')
+#
+#     driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=edit_geo_zone&page=1&geo_zone_id=2")
+#
+#     el4 = driver.find_elements_by_css_selector(".dataTable tr select[name*='[zone_code]'] option[selected='selected']")
+#     list4 = []
+#     sorted_list4 = []
+#
+#     for i, element4 in enumerate(el4):
+#
+#         list4.append(element4.get_property('text'))
+#
+#         sorted_list4.append(element4.get_property('text'))
+#
+#     sorted_list4.sort()
+#
+#     if list4[i] == sorted_list4[i]:
+#         print('Zones sorted by Aa..Zz', '\n')
+#     else:
+#         print(list4[i], ' not equals ', sorted_list4[i], '\n')
+#
+#     print('*** Test Sort Zones names has done ***')
