@@ -104,9 +104,16 @@ def test_check_sort2(driver):
     sorted_list3 = []
 
     for i, element3 in enumerate(el3):
+
         list3.append(element3.get_property('text'))
 
-    print(list3)
+        sorted_list3.append(element3.get_property('text'))
+
+    print("Canada Zones: ", list3, '\n')
+
+    sorted_list3.sort()
+
+    print("Canada Sorted Zones: ", sorted_list3, '\n')
 
     if list3[i] == sorted_list3[i]:
         print('Zones sorted by Aa..Zz', '\n')
@@ -120,11 +127,20 @@ def test_check_sort2(driver):
     sorted_list4 = []
 
     for i, element4 in enumerate(el4):
+
         list4.append(element4.get_property('text'))
 
-    print(list4)
+        sorted_list4.append(element4.get_property('text'))
+
+    print("USA Zones: ", list4, '\n')
+
+    sorted_list4.sort()
+
+    print("USA Sorted Zones: ", sorted_list4, '\n')
 
     if list4[i] == sorted_list4[i]:
         print('Zones sorted by Aa..Zz', '\n')
     else:
         print(list4[i], ' not equals ', sorted_list4[i], '\n')
+
+    print('Test Sort Zones names has done')
