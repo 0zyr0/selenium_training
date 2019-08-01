@@ -1,18 +1,3 @@
-# Сделайте сценарий для регистрации нового пользователя в учебном приложении litecart (не в админке, а в клиентской части магазина).
-#
-# Сценарий должен состоять из следующих частей:
-#
-# 1) регистрация новой учётной записи с достаточно уникальным адресом электронной почты (чтобы не конфликтовало с ранее созданными пользователями, в том числе при предыдущих запусках того же самого сценария),
-# 2) выход (logout), потому что после успешной регистрации автоматически происходит вход,
-# 3) повторный вход в только что созданную учётную запись,
-# 4) и ещё раз выход.
-#
-#     В качестве страны выбирайте United States, штат произвольный. При этом формат индекса -- пять цифр.
-#
-#     Можно оформить сценарий либо как тест, либо как отдельный исполняемый файл.
-#
-#     Проверки можно никакие не делать, только действия -- заполнение полей, нажатия на кнопки и ссылки. Если сценарий дошёл до конца, то есть созданный пользователь смог выполнить вход и выход -- значит создание прошло успешно.
-
 import pytest
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
@@ -39,74 +24,23 @@ def test_login(driver):
     #wait.until(EC.title_is("My Store"))
 
 
-def generate_email(user, out="account"):
+def generate_email():
     cache = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0] * 10
     random.shuffle(cache)
     buf = ""
     for i in range(0, 10):
         buf += str(cache.pop())
 
-    user.email = "test" + buf + "@mail.org"
+    user = "test" + buf + "@mail.org"
 
-    with open(out, "a") as file:
-        file.write(user.email + "\n")
-        file.close()
-
-
-def data_for_test():
-    first_name = 'test'
-    last_name = 'test'
-    postcode = '12345'
-    phone = '+1'
-    password = 'test'
-    conf_password = 'test'
-    adress_1 = 'test'
-    adress_2 = 'test'
-    city = 'City-17'
-
-    #email = generate_mail()
-
-
-def test_check_stickers(driver):
-
-
-
-    print(generate_email(1, 2))
-
-    driver.get("http://localhost/litecart/en/")
-
-    driver.find_element_by_link_text("New customers click here").click()
-
-    print('Sign up test done')
-
-
-def test_check_email(driver):
-    test_login(driver)
-
-    driver.get("http://localhost/litecart/admin/")
-
-    elements = driver.find_elements_by_css_selector("li#app-")
-
-    driver.find_elements_by_id("app-")[4].click()
-
-    customers = driver.find_elements_by_css_selector("tr.row")
-
-    email_list = []
-
-    for i, customer in enumerate(customers):
-
-        driver.find_elements_by_css_selector("tr.row td a i")[i].click()
-
-        verify_email = driver.find_element_by_name("email").get_attribute('value')
-
-        email_list.append(verify_email)
-
-        driver.find_element_by_name("cancel").click()
-
-    return email_list
+    return user
 
 
 def test_sign_up(driver):
+    email = generate_email()
+
+    password = 'test'
+
     test_login(driver)
 
     driver.get("http://localhost/litecart/en/")
@@ -119,7 +53,7 @@ def test_sign_up(driver):
 
     driver.find_element_by_name("address1").send_keys("test")
 
-    driver.find_element_by_name("postcode").send_keys("test")
+    driver.find_element_by_name("postcode").send_keys("12345")
 
     driver.find_element_by_name("city").send_keys("test")
 
@@ -129,8 +63,36 @@ def test_sign_up(driver):
 
     Select(select_country).select_by_value("US")
 
-    driver.find_element_by_name("email").send_keys()
+    driver.find_element_by_name("email").send_keys(email)
+
+    driver.find_element_by_name("password").send_keys(password)
+
+    driver.find_element_by_name("confirmed_password").send_keys(password)
 
     driver.find_element_by_name("phone").send_keys("+1")
 
-    print("Done")
+    driver.find_element_by_name("create_account").click()
+
+    # WebDriverWait(driver, 10)
+
+    zone = driver.find_element_by_css_selector("select[name='zone_code']")
+
+    Select(zone).select_by_value("AL")
+
+    driver.find_element_by_name("password").send_keys(password)
+
+    driver.find_element_by_name("confirmed_password").send_keys(password)
+
+    driver.find_element_by_name("create_account").click()
+
+    WebDriverWait(driver, 10)
+
+    driver.find_element_by_tag_name("div[class='content'] ul[class='list-vertical'] li a[href = 'http://localhost/litecart/en/logout']").click()
+
+    driver.find_element_by_name('email').send_keys(email)
+
+    driver.find_element_by_name('password').send_keys(password)
+
+    driver.find_element_by_name('login').click()
+
+    driver.find_element_by_tag_name("div[class='content'] ul[class='list-vertical'] li a[href = 'http://localhost/litecart/en/logout']").click()
