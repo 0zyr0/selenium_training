@@ -65,11 +65,11 @@ def test_add_order(driver):
 
     before_add = driver.find_element_by_tag_name("tr[class='footer']").get_property("textContent")
 
-    # before_add_re = re.findall(r'(\d+)$', before_add, re.MULTILINE)
+    before_add_re = re.findall(r'(\d+)$', before_add, re.MULTILINE)
 
-    p = re.match(r'', before_add)
+    #p = re.match(r'', before_add)
 
-    print(p)
+    print(before_add_re[0])
 
     driver.find_element_by_tag_name("div a[class='button']:nth-child(2)").click()
 
@@ -110,5 +110,9 @@ def test_add_order(driver):
     driver.find_element_by_name("prices[EUR]").send_keys("17")
 
     driver.find_element_by_name("save").click()
+
+    after_add = driver.find_element_by_tag_name("tr[class='footer']").get_property("textContent")
+
+    after_add_re = re.findall(r'(\d+)$', before_add, re.MULTILINE)
 
     print('Doe')
