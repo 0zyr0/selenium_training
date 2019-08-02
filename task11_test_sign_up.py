@@ -36,6 +36,32 @@ def generate_email():
     return user
 
 
+# def test_check_email(driver):
+#     test_login(driver)
+#
+#     driver.get("http://localhost/litecart/admin/")
+#
+#     elements = driver.find_elements_by_css_selector("li#app-")
+#
+#     driver.find_elements_by_id("app-")[4].click()
+#
+#     customers = driver.find_elements_by_css_selector("tr.row")
+# 
+#     email_list = []
+#
+#     for i, customer in enumerate(customers):
+#
+#         driver.find_elements_by_css_selector("tr.row td a i")[i].click()
+#
+#         verify_email = driver.find_element_by_name("email").get_attribute('value')
+#
+#         email_list.append(verify_email)
+#
+#         driver.find_element_by_name("cancel").click()
+#
+#     return email_list
+
+
 def test_sign_up(driver):
     email = generate_email()
 

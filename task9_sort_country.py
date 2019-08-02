@@ -26,14 +26,16 @@ def checking_sorting(array1, array2):
     k = len(array1)
 
     for i in range(k):
+
         if array1[i] == array2[i]:
-            print('Elements sorted by Aa..Zz', '\n')
+            continue
         else:
             print(array1[i], ' not equals ', array2[i], '\n')
 
+    print('Elements sorted by Aa..Zz', '\n')
+
 
 def loop_for_zones_edit(elem, original_list, sorted_list, length):
-
     for i, el in enumerate(elem):
 
         original_list.append(re.match(r'^\d+\s+\w{2}\s*(.*)$', el.text)[1].strip())
@@ -68,11 +70,12 @@ def test_check_sort1(driver):
 
     sorted_list_country_names.sort()
 
-    checking_sorting(original_list_country_names, sorted_list_country_names, i)
+    checking_sorting(original_list_country_names, sorted_list_country_names)
 
-    #driver.get("http://localhost/litecart/admin/?app=countries&doc=edit_country&country_code=CA")
+    # driver.get("http://localhost/litecart/admin/?app=countries&doc=edit_country&country_code=CA")
 
-    driver.find_element_by_tag_name("a[href='http://localhost/litecart/admin/?app=countries&doc=edit_country&country_code=CA'][title='Edit']").click()
+    driver.find_element_by_tag_name(
+        "a[href='http://localhost/litecart/admin/?app=countries&doc=edit_country&country_code=CA'][title='Edit']").click()
 
     element_2 = driver.find_elements_by_css_selector('#table-zones > tbody > tr:not([class])')
 
@@ -86,11 +89,14 @@ def test_check_sort1(driver):
 
     sorted_list_zones_ca.sort()
 
-    checking_sorting(original_list_zones_ca, sorted_list_zones_ca, i)
+    checking_sorting(original_list_zones_ca, sorted_list_zones_ca)
 
-    #driver.get("http://localhost/litecart/admin/?app=countries&doc=edit_country&country_code=US")
+    # driver.get("http://localhost/litecart/admin/?app=countries&doc=edit_country&country_code=US")
 
-    driver.find_element_by_tag_name("a[href='http://localhost/litecart/admin/?app=countries&doc=edit_country&country_code=US'][title='Edit']").click()
+    driver.find_element_by_tag_name("li[class='selected']").click()
+
+    driver.find_element_by_tag_name(
+        "a[href='http://localhost/litecart/admin/?app=countries&doc=edit_country&country_code=US'][title='Edit']").click()
 
     element_3 = driver.find_elements_by_css_selector('#table-zones > tbody > tr:not([class])')
 
@@ -104,7 +110,7 @@ def test_check_sort1(driver):
 
     sorted_list_zones_us.sort()
 
-    checking_sorting(original_list_zones_us, sorted_list_zones_us, i)
+    checking_sorting(original_list_zones_us, sorted_list_zones_us)
 
 
 def test_check_sort2(driver):
@@ -113,7 +119,8 @@ def test_check_sort2(driver):
 
     # driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=edit_geo_zone&page=1&geo_zone_id=1")
 
-    driver.find_element_by_tag_name("a[href='http://localhost/litecart/admin/?app=geo_zones&doc=edit_geo_zone&page=1&geo_zone_id=1'][title='Edit']").click()
+    driver.find_element_by_tag_name(
+        "a[href='http://localhost/litecart/admin/?app=geo_zones&doc=edit_geo_zone&page=1&geo_zone_id=1'][title='Edit']").click()
 
     el3 = driver.find_elements_by_css_selector(".dataTable tr select[name*='[zone_code]'] option[selected='selected']")
     list3 = []
@@ -125,11 +132,12 @@ def test_check_sort2(driver):
 
     checking_sorting(list3, sorted_list3)
 
-    #driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=edit_geo_zone&page=1&geo_zone_id=2")
+    # driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=edit_geo_zone&page=1&geo_zone_id=2")
 
-    driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones")
+    driver.find_element_by_tag_name("li[class='selected']").click()
 
-    driver.find_element_by_tag_name("a[href='http://localhost/litecart/admin/?app=geo_zones&doc=edit_geo_zone&page=1&geo_zone_id=2'][title='Edit']").click()
+    driver.find_element_by_tag_name(
+        "a[href='http://localhost/litecart/admin/?app=geo_zones&doc=edit_geo_zone&page=1&geo_zone_id=2'][title='Edit']").click()
 
     el4 = driver.find_elements_by_css_selector(".dataTable tr select[name*='[zone_code]'] option[selected='selected']")
     list4 = []
