@@ -1,9 +1,6 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.support import expected_conditions as EC
-
 
 
 @pytest.fixture
@@ -21,7 +18,6 @@ def test_login(driver):
     driver.find_element_by_name("username").send_keys("admin")
     driver.find_element_by_name("password").send_keys("admin")
     driver.find_element_by_name("login").click()
-    #wait.until(EC.title_is("My Store"))
 
 
 def test_check_stickers(driver):
@@ -32,35 +28,13 @@ def test_check_stickers(driver):
 
     a_elements = driver.find_elements_by_class_name("product")
 
+    stickers = []
+
     for i, element in enumerate(a_elements):
 
-        try:
-            element = driver.find_elements_by_tag_name("div.sticker")[i]
-        except NoSuchElementException:
-            return False
-        return True
+        sticker = driver.find_elements_by_tag_name("div.sticker")[i]
 
+        stickers.append(sticker)
 
-
-        # if (element.size is not None) and (element.size == 1):
-        #
-        #     print('One sticker')
-        #
-        # elif element.size == 0:
-        #     print("No stickers")
-        #
-        # else:
-        #     print('More stickers')
-        # element = driver.find_element_by_css_selector("div.sticker")
-        assert element
-        print(element)
-
-
-    # for i, element in enumerate(elements):
-    #     element = driver.find_elements_by_tag_name("div.sticker")[i]
-    #     # element = driver.find_element_by_css_selector("div.sticker")
-    #     assert element
-    #     print(element)
-
-
-#Товары имеют класс .product, поэтому можно проверять точное название класса, и выбранный Вами локатор локатор для поиска товаров можно исправить.
+        if sticker == stickers[i]:
+            print("Element have one sticker")
