@@ -6,16 +6,16 @@ import os
 import re
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+from pathlib import Path
 
-
-file_path = os.path.abspath('D:/work/github/zms_selenium_training/selenium_training/files/donald.jpg')
+file_path = os.path.abspath('files/donald.jpg')
 
 
 @pytest.fixture
 def driver(request):
     # создание драйвера. Инициализация браузера
     wd = webdriver.Chrome()
-    #wd = webdriver.Chrome("D:/python_selenium_test/chromedriver_win32/chromedriver.exe")
+    # wd = webdriver.Chrome("D:/python_selenium_test/chromedriver_win32/chromedriver.exe")
     request.addfinalizer(wd.quit)
     return wd
 
@@ -26,7 +26,7 @@ def test_login(driver):
     driver.find_element_by_name("username").send_keys("admin")
     driver.find_element_by_name("password").send_keys("admin")
     driver.find_element_by_name("login").click()
-    #wait.until(EC.title_is("My Store"))
+    # wait.until(EC.title_is("My Store"))
 
 
 def generate_name():
