@@ -7,7 +7,7 @@ import re
 def driver_chrome(request):
     # создание драйвера. Инициализация браузера
     wd = webdriver.Chrome()
-    #wd = webdriver.Chrome("D:/python_selenium_test/chromedriver_win32/chromedriver.exe")
+    # wd = webdriver.Chrome("D:/python_selenium_test/chromedriver_win32/chromedriver.exe")
     request.addfinalizer(wd.quit)
     return wd
 
@@ -16,7 +16,7 @@ def driver_chrome(request):
 def driver_ie(request):
     # создание драйвера. Инициализация браузера
     wd = webdriver.Ie()
-    #wd = webdriver.Chrome("D:/python_selenium_test/chromedriver_win32/chromedriver.exe")
+    # wd = webdriver.Chrome("D:/python_selenium_test/chromedriver_win32/chromedriver.exe")
     request.addfinalizer(wd.quit)
     return wd
 
@@ -25,7 +25,7 @@ def driver_ie(request):
 def driver_firefox(request):
     # создание драйвера. Инициализация браузера
     wd = webdriver.Firefox()
-    #wd = webdriver.Chrome("D:/python_selenium_test/chromedriver_win32/chromedriver.exe")
+    # wd = webdriver.Chrome("D:/python_selenium_test/chromedriver_win32/chromedriver.exe")
     request.addfinalizer(wd.quit)
     return wd
 
@@ -43,7 +43,6 @@ def get_rgb(str_rgb):
 
 
 def compare_element(element_1, element_2):
-
     if element_1 == element_2:
         print('Elements expected \n')
     else:
@@ -51,23 +50,14 @@ def compare_element(element_1, element_2):
 
 
 def check_regular_price_chrome(colors, line):
-    exp_r_1 = '119'
+    exp_color_rgb_1 = '119'
 
-    exp_g_1 = '119'
-
-    exp_b_1 = '119'
-
-    exp_r_2 = '102'
-
-    exp_g_2 = '102'
-
-    exp_b_2 = '102'
+    exp_color_rgb_2 = '102'
 
     exp_line = 'line-through'
 
-    if (((colors[0] == exp_r_1) and (colors[1] == exp_g_1) and (colors[2] == exp_b_1)) or
-
-            ((colors[0] == exp_r_2) and (colors[1] == exp_g_2) and (colors[2] == exp_b_2)) and (line == exp_line)):
+    if (((colors[0] and colors[1] and colors[2]) == exp_color_rgb_1) or
+            ((colors[0] and colors[1] and colors[2]) == exp_color_rgb_2) and (line == exp_line)):
 
         print('Expected element properties \n')
     else:
@@ -75,99 +65,69 @@ def check_regular_price_chrome(colors, line):
 
 
 def check_discount_price_chrome(colors, font):
-
-    exp_g = '0'
-
-    exp_b = '0'
+    exp_color_gb = '0'
 
     exp_font = '700'
 
-    if (colors[1] == exp_g) and (colors[2] == exp_b) and (font == exp_font):
+    if (colors[1] and (colors[2]) == exp_color_gb) and (font == exp_font):
+
         print('Expected element properties \n')
     else:
         print('Not expected element properties \n')
 
 
 def check_regular_price_firefox(colors, line):
+    exp_color_rgb_1 = '119'
 
-    exp_r_1 = '119'
-
-    exp_g_1 = '119'
-
-    exp_b_1 = '119'
-
-    exp_r_2 = '102'
-
-    exp_g_2 = '102'
-
-    exp_b_2 = '102'
+    exp_color_rgb_2 = '102'
 
     exp_line = 'line-through'
 
-    if (((colors[0] == exp_r_1) and (colors[1] == exp_g_1) and (colors[2] == exp_b_1)) or
+    if (((colors[0] and colors[1] and colors[2]) == exp_color_rgb_1) or
+            ((colors[0] and colors[1] and colors[2]) == exp_color_rgb_2) and (line == exp_line)):
 
-            ((colors[0] == exp_r_2) and (colors[1] == exp_g_2) and (colors[2] == exp_b_2)) and (line == exp_line)):
         print('Expected element properties in Firefox \n')
     else:
         print('Not expected element properties in Firefox \n')
 
 
 def check_regular_price_ie(colors, line):
+    exp_color_rgb_1 = '119'
 
-    exp_r_1 = '119'
-
-    exp_g_1 = '119'
-
-    exp_b_1 = '119'
-
-    exp_r_2 = '102'
-
-    exp_g_2 = '102'
-
-    exp_b_2 = '102'
+    exp_color_rgb_2 = '102'
 
     exp_line = ''
 
-    if (((colors[0] == exp_r_1) and (colors[1] == exp_g_1) and (colors[2] == exp_b_1)) or
-
-            ((colors[0] == exp_r_2) and (colors[1] == exp_g_2) and (colors[2] == exp_b_2)) and (line == exp_line)):
+    if (((colors[0] and colors[1] and colors[2]) == exp_color_rgb_1) or
+            ((colors[0] and colors[1] and colors[2]) == exp_color_rgb_2) and (line == exp_line)):
         print('Expected element properties in IE \n')
     else:
         print('Not expected element properties in IE \n')
 
 
 def check_discount_price_ie(colors, font):
-
-    exp_g = '0'
-
-    exp_b = '0'
+    exp_color_gb = '0'
 
     exp_font = '700'
 
     exp_font2 = '900'
 
-    if (colors[1] == exp_g) and (colors[2] == exp_b) and ((font == exp_font) or (font == exp_font2)):
+    if (colors[1] and (colors[2]) == exp_color_gb) and ((font == exp_font) or (font == exp_font2)):
+
         print('Expected element properties in IE \n')
     else:
         print('Not expected element properties in IE \n')
 
-    # if (color == exp_color) and ((font == exp_font) or (font == exp_font2)):
-    #     print('Expected element properties in IE \n')
-    # else:
-    #     print('Not expected element properties in IE \n')
-
 
 def check_discount_price_firefox(colors, font):
-
-    exp_g = '0'
-
-    exp_b = '0'
+    exp_color_gb = '0'
 
     exp_font = '700'
 
     exp_font2 = '900'
 
-    if (colors[1] == exp_g) and (colors[2] == exp_b) and ((font == exp_font) or (font == exp_font2)):
+    if (colors[1] and (colors[2]) == exp_color_gb) and ((font == exp_font) or (font == exp_font2)):
+
         print('Expected element properties in Firefox \n')
     else:
         print('Not expected element properties in Firefox \n')
@@ -181,30 +141,39 @@ def test_check_orders(driver_chrome):
     driver_chrome.get("http://localhost/litecart/en/")
 
     # Название
-    main_duck_name = driver_chrome.find_element_by_css_selector("div#box-campaigns div.name").get_attribute("textContent")
+    main_duck_name = driver_chrome.find_element_by_css_selector("div#box-campaigns div.name").get_attribute(
+        "textContent")
 
     # Обычная цена
-    main_duck_price = driver_chrome.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").get_attribute("textContent")
+    main_duck_price = driver_chrome.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper s.regular-price").get_attribute("textContent")
 
     # Скидочная цена
-    main_duck_price_discount = driver_chrome.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").get_attribute("textContent")
+    main_duck_price_discount = driver_chrome.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper strong.campaign-price").get_attribute("textContent")
 
     # Цвета
-    m_color_price = driver_chrome.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("color")
+    m_color_price = driver_chrome.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("color")
 
-    m_color_price_discount = driver_chrome.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("color")
+    m_color_price_discount = driver_chrome.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("color")
 
     # Зачеркутость (line-through)
-    m_price_line = driver_chrome.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("text-decoration-line")
+    m_price_line = driver_chrome.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("text-decoration-line")
 
     # Шрифт
-    m_bold = driver_chrome.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-weight")
+    m_bold = driver_chrome.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-weight")
 
     # Обычная
-    main_size = driver_chrome.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("font-size")
+    main_size = driver_chrome.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("font-size")
 
     # Скидочная
-    main_size_discount = driver_chrome.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-size")
+    main_size_discount = driver_chrome.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-size")
 
     ### Атрибуты открытой ссылки
 
@@ -214,29 +183,37 @@ def test_check_orders(driver_chrome):
     duck_name = driver_chrome.find_element_by_css_selector("h1.title").get_attribute("textContent")
 
     # Обычная цена
-    duck_price = driver_chrome.find_element_by_css_selector("div.information s.regular-price").get_attribute("textContent")
+    duck_price = driver_chrome.find_element_by_css_selector("div.information s.regular-price").get_attribute(
+        "textContent")
 
     # Скидочная цена
-    duck_price_discount = driver_chrome.find_element_by_css_selector("div.information strong.campaign-price").get_attribute("textContent")
+    duck_price_discount = driver_chrome.find_element_by_css_selector(
+        "div.information strong.campaign-price").get_attribute("textContent")
 
     # Цвета
-    color_price = driver_chrome.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("color")
+    color_price = driver_chrome.find_element_by_css_selector("div.information s.regular-price").value_of_css_property(
+        "color")
 
-    color_price_discount = driver_chrome.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("color")
+    color_price_discount = driver_chrome.find_element_by_css_selector(
+        "div.information strong.campaign-price").value_of_css_property("color")
 
     # Зачеркутость (line-through)
-    price_line = driver_chrome.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("text-decoration-line")
+    price_line = driver_chrome.find_element_by_css_selector("div.information s.regular-price").value_of_css_property(
+        "text-decoration-line")
 
     # Шрифт
-    sub_bold = driver_chrome.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("font-weight")
+    sub_bold = driver_chrome.find_element_by_css_selector(
+        "div.information strong.campaign-price").value_of_css_property("font-weight")
 
     # Размер
 
     # Обычная цена
-    duck_size = driver_chrome.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("font-size")
+    duck_size = driver_chrome.find_element_by_css_selector("div.information s.regular-price").value_of_css_property(
+        "font-size")
 
     # Скидочная цена
-    duck_size_discount = driver_chrome.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("font-size")
+    duck_size_discount = driver_chrome.find_element_by_css_selector(
+        "div.information strong.campaign-price").value_of_css_property("font-size")
 
     # Сравнения названий
 
@@ -264,7 +241,6 @@ def test_check_orders(driver_chrome):
 
     compare_element(duck_size, duck_size_discount)
 
-
     print("----------------------------------------- Test Chrome Done ----------------------------------------- \n")
 
 
@@ -277,30 +253,39 @@ def test_check_orders_ff(driver_firefox):
 
     # Название
 
-    main_duck_name = driver_firefox.find_element_by_css_selector("div#box-campaigns div.name").get_attribute("textContent")
+    main_duck_name = driver_firefox.find_element_by_css_selector("div#box-campaigns div.name").get_attribute(
+        "textContent")
 
     # Обычная цена
-    main_duck_price = driver_firefox.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").get_attribute("textContent")
+    main_duck_price = driver_firefox.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper s.regular-price").get_attribute("textContent")
 
     # Скидочная цена
-    main_duck_price_discount = driver_firefox.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").get_attribute("textContent")
+    main_duck_price_discount = driver_firefox.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper strong.campaign-price").get_attribute("textContent")
 
     # Цвета
-    m_color_price = driver_firefox.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("color")
+    m_color_price = driver_firefox.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("color")
 
-    m_color_price_discount = driver_firefox.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("color")
+    m_color_price_discount = driver_firefox.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("color")
 
     # Зачеркутость (line-through)
-    m_price_line = driver_firefox.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("text-decoration-line")
+    m_price_line = driver_firefox.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("text-decoration-line")
 
     # Шрифт
-    m_bold = driver_firefox.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-weight")
+    m_bold = driver_firefox.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-weight")
 
     # Обычная
-    main_size = driver_firefox.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("font-size")
+    main_size = driver_firefox.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("font-size")
 
     # Скидочная
-    main_size_discount = driver_firefox.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-size")
+    main_size_discount = driver_firefox.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-size")
 
     ### Атрибуты открытой ссылки
 
@@ -310,29 +295,37 @@ def test_check_orders_ff(driver_firefox):
     duck_name = driver_firefox.find_element_by_css_selector("h1.title").get_attribute("textContent")
 
     # Обычная цена
-    duck_price = driver_firefox.find_element_by_css_selector("div.information s.regular-price").get_attribute("textContent")
+    duck_price = driver_firefox.find_element_by_css_selector("div.information s.regular-price").get_attribute(
+        "textContent")
 
     # Скидочная цена
-    duck_price_discount = driver_firefox.find_element_by_css_selector("div.information strong.campaign-price").get_attribute("textContent")
+    duck_price_discount = driver_firefox.find_element_by_css_selector(
+        "div.information strong.campaign-price").get_attribute("textContent")
 
     # Цвета
-    color_price = driver_firefox.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("color")
+    color_price = driver_firefox.find_element_by_css_selector("div.information s.regular-price").value_of_css_property(
+        "color")
 
-    color_price_discount = driver_firefox.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("color")
+    color_price_discount = driver_firefox.find_element_by_css_selector(
+        "div.information strong.campaign-price").value_of_css_property("color")
 
     # Зачеркутость (line-through)
-    price_line = driver_firefox.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("text-decoration-line")
+    price_line = driver_firefox.find_element_by_css_selector("div.information s.regular-price").value_of_css_property(
+        "text-decoration-line")
 
     # Шрифт?
-    sub_bold = driver_firefox.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("font-weight")
+    sub_bold = driver_firefox.find_element_by_css_selector(
+        "div.information strong.campaign-price").value_of_css_property("font-weight")
 
     # Размер
 
     # Обычная цена
-    duck_size = driver_firefox.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("font-size")
+    duck_size = driver_firefox.find_element_by_css_selector("div.information s.regular-price").value_of_css_property(
+        "font-size")
 
     # Скидочная цена
-    duck_size_discount = driver_firefox.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("font-size")
+    duck_size_discount = driver_firefox.find_element_by_css_selector(
+        "div.information strong.campaign-price").value_of_css_property("font-size")
 
     # Сравнения названий
 
@@ -375,27 +368,35 @@ def test_check_orders_ie(driver_ie):
     main_duck_name = driver_ie.find_element_by_css_selector("div#box-campaigns div.name").get_attribute("textContent")
 
     # Обычная цена
-    main_duck_price = driver_ie.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").get_attribute("textContent")
+    main_duck_price = driver_ie.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper s.regular-price").get_attribute("textContent")
 
     # Скидочная цена
-    main_duck_price_discount = driver_ie.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").get_attribute("textContent")
+    main_duck_price_discount = driver_ie.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper strong.campaign-price").get_attribute("textContent")
 
     # Цвета
-    m_color_price = driver_ie.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("color")
+    m_color_price = driver_ie.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("color")
 
-    m_color_price_discount = driver_ie.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("color")
+    m_color_price_discount = driver_ie.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("color")
 
     # Зачеркутость (line-through)
-    m_price_line = driver_ie.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("text-decoration-line")
+    m_price_line = driver_ie.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("text-decoration-line")
 
     # Шрифт
-    m_bold = driver_ie.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-weight")
+    m_bold = driver_ie.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-weight")
 
     # Обычная
-    main_size = driver_ie.find_element_by_css_selector("div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("font-size")
+    main_size = driver_ie.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper s.regular-price").value_of_css_property("font-size")
 
     # Скидочная
-    main_size_discount = driver_ie.find_element_by_css_selector("div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-size")
+    main_size_discount = driver_ie.find_element_by_css_selector(
+        "div#box-campaigns div.price-wrapper strong.campaign-price").value_of_css_property("font-size")
 
     ### Атрибуты открытой ссылки
 
@@ -408,26 +409,33 @@ def test_check_orders_ie(driver_ie):
     duck_price = driver_ie.find_element_by_css_selector("div.information s.regular-price").get_attribute("textContent")
 
     # Скидочная цена
-    duck_price_discount = driver_ie.find_element_by_css_selector("div.information strong.campaign-price").get_attribute("textContent")
+    duck_price_discount = driver_ie.find_element_by_css_selector("div.information strong.campaign-price").get_attribute(
+        "textContent")
 
     # Цвета
-    color_price = driver_ie.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("color")
+    color_price = driver_ie.find_element_by_css_selector("div.information s.regular-price").value_of_css_property(
+        "color")
 
-    color_price_discount = driver_ie.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("color")
+    color_price_discount = driver_ie.find_element_by_css_selector(
+        "div.information strong.campaign-price").value_of_css_property("color")
 
     # Зачеркутость (line-through)
-    price_line = driver_ie.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("text-decoration-line")
+    price_line = driver_ie.find_element_by_css_selector("div.information s.regular-price").value_of_css_property(
+        "text-decoration-line")
 
     # Шрифт?
-    sub_bold = driver_ie.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("font-weight")
+    sub_bold = driver_ie.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property(
+        "font-weight")
 
     # Размер
 
     # Обычная цена
-    duck_size = driver_ie.find_element_by_css_selector("div.information s.regular-price").value_of_css_property("font-size")
+    duck_size = driver_ie.find_element_by_css_selector("div.information s.regular-price").value_of_css_property(
+        "font-size")
 
     # Скидочная цена
-    duck_size_discount = driver_ie.find_element_by_css_selector("div.information strong.campaign-price").value_of_css_property("font-size")
+    duck_size_discount = driver_ie.find_element_by_css_selector(
+        "div.information strong.campaign-price").value_of_css_property("font-size")
 
     # Сравнения названий
 
