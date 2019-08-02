@@ -1,18 +1,3 @@
-# Для добавления товара нужно открыть меню Catalog, в правом верхнем углу нажать кнопку "Add New Product",
-# заполнить поля с информацией о товаре и сохранить.
-#
-# Достаточно заполнить только информацию на вкладках General, Information и Prices. Скидки (Campains)
-# на вкладке Prices можно не добавлять.
-#
-# Переключение между вкладками происходит не мгновенно, поэтому после переключения можно
-# сделать небольшую паузу (о том, как делать более правильные ожидания, будет рассказано в следующих занятиях).
-#
-# Картинку с изображением товара нужно уложить в репозиторий вместе с кодом.
-# При этом указывать в коде полный абсолютный путь к файлу плохо, на другой машине работать не будет.
-# Надо средствами языка программирования преобразовать относительный путь в абсолютный.
-#
-# После сохранения товара нужно убедиться, что он появился в каталоге (в админке).
-
 import pytest
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
@@ -67,10 +52,6 @@ def test_add_order(driver):
 
     before_add_re = re.findall(r'(\d+)$', before_add, re.MULTILINE)
 
-    #p = re.match(r'', before_add)
-
-    print(before_add_re[0])
-
     driver.find_element_by_tag_name("div a[class='button']:nth-child(2)").click()
 
     driver.find_element_by_name("name[en]").send_keys(name_order)
@@ -113,6 +94,9 @@ def test_add_order(driver):
 
     after_add = driver.find_element_by_tag_name("tr[class='footer']").get_property("textContent")
 
-    after_add_re = re.findall(r'(\d+)$', before_add, re.MULTILINE)
+    after_add_re = re.findall(r'(\d+)$', after_add, re.MULTILINE)
 
-    print('Doe')
+    if before_add_re[0] < after_add_re[0]:
+        print("New order add to table")
+    else:
+        print("New order not add to table")
