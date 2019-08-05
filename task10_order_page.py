@@ -50,14 +50,10 @@ def compare_element(element_1, element_2):
 
 
 def check_regular_price_chrome(colors, line):
-    exp_color_rgb_1 = '119'
-
-    exp_color_rgb_2 = '102'
 
     exp_line = 'line-through'
 
-    if (((colors[0] and colors[1] and colors[2]) == exp_color_rgb_1) or
-            ((colors[0] and colors[1] and colors[2]) == exp_color_rgb_2) and (line == exp_line)):
+    if (colors[0] == colors[1] == colors[2]) and (line == exp_line):
 
         print('Expected element properties \n')
     else:
@@ -69,7 +65,7 @@ def check_discount_price_chrome(colors, font):
 
     exp_font = '700'
 
-    if (colors[1] and (colors[2]) == exp_color_gb) and (font == exp_font):
+    if (colors[1] == (colors[2]) == exp_color_gb) and (font == exp_font):
 
         print('Expected element properties \n')
     else:
@@ -77,14 +73,10 @@ def check_discount_price_chrome(colors, font):
 
 
 def check_regular_price_firefox(colors, line):
-    exp_color_rgb_1 = '119'
-
-    exp_color_rgb_2 = '102'
 
     exp_line = 'line-through'
 
-    if (((colors[0] and colors[1] and colors[2]) == exp_color_rgb_1) or
-            ((colors[0] and colors[1] and colors[2]) == exp_color_rgb_2) and (line == exp_line)):
+    if (colors[0] == colors[1] == colors[2]) and (line == exp_line):
 
         print('Expected element properties in Firefox \n')
     else:
@@ -92,14 +84,11 @@ def check_regular_price_firefox(colors, line):
 
 
 def check_regular_price_ie(colors, line):
-    exp_color_rgb_1 = '119'
-
-    exp_color_rgb_2 = '102'
 
     exp_line = ''
 
-    if (((colors[0] and colors[1] and colors[2]) == exp_color_rgb_1) or
-            ((colors[0] and colors[1] and colors[2]) == exp_color_rgb_2) and (line == exp_line)):
+    if (colors[0] == colors[1] == colors[2]) and (line == exp_line):
+
         print('Expected element properties in IE \n')
     else:
         print('Not expected element properties in IE \n')
@@ -112,7 +101,7 @@ def check_discount_price_ie(colors, font):
 
     exp_font2 = '900'
 
-    if (colors[1] and (colors[2]) == exp_color_gb) and ((font == exp_font) or (font == exp_font2)):
+    if (colors[1] == (colors[2]) == exp_color_gb) and ((font == exp_font) or (font == exp_font2)):
 
         print('Expected element properties in IE \n')
     else:
@@ -126,7 +115,7 @@ def check_discount_price_firefox(colors, font):
 
     exp_font2 = '900'
 
-    if (colors[1] and (colors[2]) == exp_color_gb) and ((font == exp_font) or (font == exp_font2)):
+    if (colors[1] == (colors[2]) == exp_color_gb) and ((font == exp_font) or (font == exp_font2)):
 
         print('Expected element properties in Firefox \n')
     else:
