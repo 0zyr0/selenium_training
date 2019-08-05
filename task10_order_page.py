@@ -50,7 +50,6 @@ def compare_element(element_1, element_2):
 
 
 def check_regular_price_chrome(colors, line):
-
     exp_line = 'line-through'
 
     if (colors[0] == colors[1] == colors[2]) and (line == exp_line):
@@ -73,7 +72,6 @@ def check_discount_price_chrome(colors, font):
 
 
 def check_regular_price_firefox(colors, line):
-
     exp_line = 'line-through'
 
     if (colors[0] == colors[1] == colors[2]) and (line == exp_line):
@@ -84,7 +82,6 @@ def check_regular_price_firefox(colors, line):
 
 
 def check_regular_price_ie(colors, line):
-
     exp_line = ''
 
     if (colors[0] == colors[1] == colors[2]) and (line == exp_line):
@@ -125,7 +122,7 @@ def check_discount_price_firefox(colors, font):
 def test_check_orders(driver_chrome):
     # test_login(driver)
 
-    ### Атрибуты главной страницы
+    # Атрибуты главной страницы
 
     driver_chrome.get("http://localhost/litecart/en/")
 
