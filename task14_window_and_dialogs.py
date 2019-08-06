@@ -1,19 +1,7 @@
-# Сделайте сценарий, который проверяет, что ссылки на странице редактирования страны открываются в новом окне.
-#
-# 4) возле некоторых полей есть ссылки с иконкой в виде квадратика со стрелкой -- они ведут на внешние страницы
-# и открываются в новом окне, именно это и нужно проверить.
-#
-#  Конечно, можно просто убедиться в том, что у ссылки есть атрибут target="_blank".
-#  Но в этом упражнении требуется именно кликнуть по ссылке, чтобы она открылась в новом окне,
-#  потом переключиться в новое окно, закрыть его, вернуться обратно, и повторить эти действия для всех таких ссылок.
-#
-#     Не забудьте, что новое окно открывается не мгновенно, поэтому требуется ожидание открытия окна.
-
 import pytest
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
 
 
 @pytest.fixture
@@ -65,7 +53,6 @@ def test_open_window(driver):
     all_links = driver.find_elements_by_tag_name("a[target='_blank'] i[class='fa fa-external-link']")
 
     for i, element in enumerate(all_links):
-
         driver.find_elements_by_tag_name("a[target='_blank'] i[class='fa fa-external-link']")[i].click()
 
         WebDriverWait(driver, 15)
