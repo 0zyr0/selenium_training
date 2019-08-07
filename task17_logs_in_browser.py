@@ -1,19 +1,7 @@
-# Сделайте сценарий, который проверяет, не появляются ли в логе браузера сообщения при открытии страниц в учебном приложении,
-# а именно -- страниц товаров в каталоге в административной панели.
-#
-# Сценарий должен состоять из следующих частей:
-#
-# 3) последовательно открывать страницы товаров и проверять, не появляются ли в логе браузера сообщения (любого уровня)
-
 import pytest
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEventListener
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 @pytest.fixture
@@ -35,6 +23,13 @@ def test_login(driver):
 
 
 def test_log_browser(driver):
+    # enable browser logging
+    d = DesiredCapabilities.CHROME
+    d['goog:loggingPrefs'] = {'browser': 'ALL'}
+    driver = webdriver.Chrome(desired_capabilities=d)
+
+    # driver = webdriver.Chrome(desired_capabilities=d, service_args=["--verbose", "--log-path=D:\\qc1.log"])
+
     test_login(driver)
 
     driver.get("http://localhost/litecart/admin/")
@@ -43,3 +38,15 @@ def test_log_browser(driver):
 
     driver.find_element_by_tag_name("a[href='http://localhost/litecart/admin/?app=catalog&doc=catalog&category_id=1']").click()
 
+    elements = driver.find_elements_by_tag_name("i[class='fa fa-pencil']")
+
+    for i, element in enumerate(elements):
+        driver.find_elements_by_tag_name("i[class='fa fa-pencil']")[i].click()
+
+        #driver.find_element_by_tag_name("a[href='http://localhost/litecart/admin/?app=catalog&doc=catalog']").click()
+
+        driver.get("http://localhost/litecart/admin/?app=catalog&doc=catalog")
+
+        print("\n", driver.get_log("browser"))
+
+        driver.find_element_by_tag_name("a[href='http://localhost/litecart/admin/?app=catalog&doc=catalog&category_id=1']").click()
